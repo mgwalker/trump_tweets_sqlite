@@ -31,9 +31,13 @@ def insert_tweet_into_db(tweet, cursor):
         )
     )
 
-conn = sqlite3.connect("databases/{}-condensed.sqlite".format(year))
-cursor = conn.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS Tweets (id_str TEXT PRIMARY KEY, created_at TEXT, created INTEGER, text TEXT, source TEXT, retweet_count INTEGER, favorite_count INTEGER, is_retweet INTEGER, in_reply_to_user_id_str TEXT)")
+everythingConn = sqlite3.connect("databases/all-condensed.sqlite");
+everythingDB = everythingConn.cursor()
+everythingDB.execute("CREATE TABLE IF NOT EXISTS Tweets (id_str TEXT PRIMARY KEY, created_at TEXT, created INTEGER, text TEXT, source TEXT, retweet_count INTEGER, favorite_count INTEGER, is_retweet INTEGER, in_reply_to_user_id_str TEXT)")
+
+specificYearConn = sqlite3.connect("databases/{}-condensed.sqlite".format(year))
+specificYearDB = specificYearConn.cursor()
+specificYearDB.execute("CREATE TABLE IF NOT EXISTS Tweets (id_str TEXT PRIMARY KEY, created_at TEXT, created INTEGER, text TEXT, source TEXT, retweet_count INTEGER, favorite_count INTEGER, is_retweet INTEGER, in_reply_to_user_id_str TEXT)")
 
 stream = jsonReader.stream("tweets/condensed_{}.json".format(year))
 
@@ -41,10 +45,14 @@ tweet = stream.nextObject()
 count = 0
 while tweet != False:
     count += 1
-    insert_tweet_into_db(tweet, cursor)
+    insert_tweet_into_db(tweet, specificYearDB)
+    insert_tweet_into_db(tweet, everythingDB)
     tweet = stream.nextObject()
-conn.commit()
-conn.close()
+
+everythingConn.commit()
+everythingConn.close()
+specificYearConn.commit()
+specificYearConn.close()
 
 os.remove("tweets/condensed_{}.json".format(year))
 os.rmdir("tweets")
