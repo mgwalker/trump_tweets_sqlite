@@ -31,7 +31,7 @@ def insert_tweet_into_db(tweet, cursor):
         )
     )
 
-conn = sqlite3.connect("{}-condensed.sqlite".format(year))
+conn = sqlite3.connect("databases/{}-condensed.sqlite".format(year))
 cursor = conn.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS Tweets (id_str TEXT PRIMARY KEY, created_at TEXT, created INTEGER, text TEXT, source TEXT, retweet_count INTEGER, favorite_count INTEGER, is_retweet INTEGER, in_reply_to_user_id_str TEXT)")
 
