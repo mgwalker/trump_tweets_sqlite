@@ -1,0 +1,9 @@
+version: "3"
+services:
+  trump-tweet-getter:
+    build:
+      context: ./
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./:/app
+    command: python main.py
