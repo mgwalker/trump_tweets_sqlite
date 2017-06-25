@@ -42,9 +42,7 @@ specificYearDB.execute("CREATE TABLE IF NOT EXISTS Tweets (id_str TEXT PRIMARY K
 stream = jsonReader.stream("tweets/condensed_{}.json".format(year))
 
 tweet = stream.nextObject()
-count = 0
 while tweet != False:
-    count += 1
     insert_tweet_into_db(tweet, specificYearDB)
     insert_tweet_into_db(tweet, everythingDB)
     tweet = stream.nextObject()
