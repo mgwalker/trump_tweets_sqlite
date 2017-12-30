@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  update tweets:
+    docker:
+      - image: circleci/python:3
+    steps:
+      - add_ssh_keys
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "requirements.txt" }}
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: dependency-cache-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+      - run:
+          name: update tweets
+          command: |
+            . venv/bin/activate
+            python main.py
+      - run:
+          name: configure git user
+          command: |
+            git config user.email "mgwalker@gmail.com"
+            git config user.name "Automation on CircleCI"
+      - run:
+          name: commit changes
+          command: |
+            git add databases/
+            git commit -m "`date "+%d %b %Y, %H:%M"`"
+      - run:
+          name: push to Github
+          command: git push
+
+workflows:
+  version: 2
+  scheduled:
+    triggers:
+      - schedule:
+          cron: "0 0,6,12,18 * * *"
+    jobs:
+      - update tweets
