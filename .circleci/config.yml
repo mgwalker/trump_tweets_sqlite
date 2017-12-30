@@ -42,6 +42,10 @@ workflows:
   scheduled:
     triggers:
       - schedule:
-          cron: "0 3,9,15,21 * * *"
+          cron: "0 4,10,16,22 * * *"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - update tweets
