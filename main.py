@@ -17,7 +17,7 @@ def get_creation_date(tweet):
     return calendar.timegm(parse(tweet["created_at"]).timetuple())
 
 def insert_tweet_into_db(tweet, cursor):
-    cursor.execute("INSERT OR IGNORE INTO Tweets (id_str, created_at, created, text, source, retweet_count, favorite_count, is_retweet, in_reply_to_user_id_str) VALUES (?,?,?,?,?,?,?,?,?)",
+    cursor.execute("INSERT OR REPLACE INTO Tweets (id_str, created_at, created, text, source, retweet_count, favorite_count, is_retweet, in_reply_to_user_id_str) VALUES (?,?,?,?,?,?,?,?,?)",
         (
             tweet["id_str"],
             tweet["created_at"],
