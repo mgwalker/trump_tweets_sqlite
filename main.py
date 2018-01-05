@@ -7,8 +7,8 @@ from dateutil.parser import parse
 import calendar
 import jsonstream.reader as jsonReader
 
-years = [2017,2016,2015,2014,2013,2012,2011,2010,2009]
-year = 2017
+years = [2018,2017,2016,2015,2014,2013,2012,2011,2010,2009]
+year = 2018
 
 urllib.request.urlretrieve("https://github.com/bpb27/trump_tweet_data_archive/raw/master/condensed_{}.json.zip".format(year), "tweets_{}.zip".format(year))
 
@@ -76,13 +76,13 @@ while tweet != False:
     insert_tweet_into_db(tweet, everythingDB)
     tweet = stream.nextObject()
 
-summaryString = get_summary_string(years)
-add_summary_to_readme(summaryString)
-
 everythingConn.commit()
 everythingConn.close()
 specificYearConn.commit()
 specificYearConn.close()
+
+summaryString = get_summary_string(years)
+add_summary_to_readme(summaryString)
 
 os.remove("tweets/condensed_{}.json".format(year))
 os.rmdir("tweets")
