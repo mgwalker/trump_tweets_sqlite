@@ -3,6 +3,21 @@
 Takes the JSON data harvested by [trump_tweet_data_archive](https://github.com/bpb27/trump_tweet_data_archive)
 and makes it available as SQLite databases.  Updates every 6 hours.
 
+# Last updated on January 04, 2018 at 22:01
+
+|Year|Tweets|
+|---|---|
+|2017|2,605|
+|2016|4,225|
+|2015|7,536|
+|2014|5,784|
+|2013|8,144|
+|2012|3,531|
+|2011|774|
+|2010|142|
+|2009|56|
+|**Total**|**32,797**|
+
 ## Data
 
 The databases are located in the [databases](databases/) directory.  They are split by year, but
