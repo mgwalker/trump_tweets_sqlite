@@ -3,11 +3,11 @@
 Takes the JSON data harvested by [trump_tweet_data_archive](https://github.com/bpb27/trump_tweet_data_archive)
 and makes it available as SQLite databases.  Updates every 6 hours.
 
-# Last updated on January 07, 2018 at 16:00
+# Last updated on January 07, 2018 at 22:00
 
 |Year|Tweets|
 |---|---|
-|2018|47|
+|2018|49|
 |2017|2,605|
 |2016|4,225|
 |2015|7,536|
@@ -17,7 +17,7 @@ and makes it available as SQLite databases.  Updates every 6 hours.
 |2011|774|
 |2010|142|
 |2009|56|
-|**Total**|**32,844**|
+|**Total**|**32,846**|
 
 ## Data
 
